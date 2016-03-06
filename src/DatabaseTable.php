@@ -128,7 +128,7 @@ class DatabaseTable
      * @param Object $object
      * @return integer
      */
-    public static function update($object)
+    public static function update(DatabaseTable $object)
     {
         $db = new DatabaseManager();
         $connection = $db->getDbh();
