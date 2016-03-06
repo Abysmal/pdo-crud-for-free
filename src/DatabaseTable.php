@@ -1,5 +1,5 @@
 <?php
-namespace Mattsmithdev;
+namespace Mattsmithdev\PdoCrud;
 
 class DatabaseTable
 {

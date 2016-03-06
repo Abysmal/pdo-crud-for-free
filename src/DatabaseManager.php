@@ -1,5 +1,5 @@
 <?php
-namespace Mattsmithdev;
+namespace Mattsmithdev\PdoCrud;
 
 /**
  * Class DatabaseManager - make things easy to work with MySQL DBs and PDO

@@ -1,142 +1,70 @@
-# pdo-crud-for-free
-Classes to provide MySQL PDO CRUD methods 'magically' via a simple subclassing
+# :package_name
 
-Some classes to make it *really* easy to do PDO DB CRUD
-as long as you follow a few basic (common practice) assumptions
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-travis]][link-travis]
+[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
+[![Quality Score][ico-code-quality]][link-code-quality]
+[![Total Downloads][ico-downloads]][link-downloads]
 
-## ASSUMPTION 1: lowerCamelCase - DB table column names matching PHP Class properties
-This tool assumes your database table column names, and their corresponding PHP private class properties are named consistently in 'lowerCamelCase'
-e.g.
+**Note:** Replace ```:author_name``` ```:author_username``` ```:author_website``` ```:author_email``` ```:vendor``` ```:package_name``` ```:package_description``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line.
 
-    id
-    title
-    category
-    price
+This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
+PSRs you support to avoid any confusion with users and contributors.
 
-## ASSUMPTION 2: lower case plural DB table name mapping to upper case singular PHP class name
-If you have a DB table 'products' this will correspond to a PHP class 'Product'
+## Install
 
-table names are named lower case, are and plural, e.g 
+Via Composer
 
-    users
+``` bash
+$ composer require :vendor/:package_name
+```
 
-PHP class names are named with a capital first letter, and are singular, e.g. 
+## Usage
 
-    User
+``` php
+$skeleton = new League\Skeleton();
+echo $skeleton->echoPhrase('Hello, League!');
+```
 
-## ASSUMPTION 3: no constructor for your PHP classes
-due to the nature of PDO populating properties of objects when DB rows are converted into object instances
-do not have a constructor for the PHP classes that correspond to your DB tables
+## Change log
 
-so you'd create a new object, and use the objects public 'setter' methods
-e.g.
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
-    $p = new Product();
-    $p->setDescription('hammer');
-    $p->setPrice(9.99);
-    etc.
+## Testing
 
-## step 1: create your DB tables
-e.g. create your tables (with integer 'id' field, primary key, auto-increment)
+``` bash
+$ composer test
+```
 
-e.g. SQL table to store DVD data
+## Contributing
 
-    id:int (primary key, autoincrement)
-    title:text
-    category:text
-    price:float
+Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
 
-## step 2: create a corresponding PHP class, and subclass from Mattsmithdev\DatabaseTable
-e.g.
+## Security
 
-    <?php
-    namespace Whatever;
-    
-    use Mattsmithdev\DatabaseTable;
-    
-        class Dvd extends DatabaseTable
-        {
-            private $id;
-            private $title;
-            private $category;
-            private $price;
-            
-            // and public getters and setters ...
-            
-## step 3: now use the 'magically appearing' static DB CRUD methods
+If you discover any security related issues, please email :author_email instead of using the issue tracker.
 
-e.g. to get an array of all dvd records from table 'dvds' just write:
+## Credits
 
-    $dvds = Dvd::getAll();
-    
+- [:author_name][link-author]
+- [All Contributors][link-contributors]
 
-## ::getAll()
-this method returns an array of objects for eac row of the corresponding DB table
-e.g.
+## License
 
-    // array of Dvd objects, populated from database table 'dvds'
-    $dvds = Dvd::getAll();
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-## ::getOneById($id)
-this method returns an array of objects for eac row of the corresponding DB table
-e.g.
+[ico-version]: https://img.shields.io/packagist/v/:vendor/:package_name.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/:vendor/:package_name/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/:vendor/:package_name.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/:vendor/:package_name.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/:vendor/:package_name.svg?style=flat-square
 
-    // one Dvd object (or 'null'), populated by row in database table 'dvds' with id=27
-    $dvds = Dvd::getOneById(27);
-
-## ::delete($id)
-this method deletes the record corresponding to the given 'id'
-returns true/false depending on success of the deletion
-e.g.
-
-    // delete row in database table 'dvds' with id=12
-    $deleteSuccess = Dvd::delete(12);
-    
-## ::insert($dvd)
-this method adds a new row to the database, based on the contents of the provided object
-(any 'id' in this object is ignored, since the table is auto-increment, so it's left to the DB to assign a new, unique 'id' for new records)
-returns the 'id' of the new record (or -1 if error when inserting)
-e.g.
-
-    // delete row in database table 'dvds' with id=12
-    $dvd = new Dvd();
-    $dvd->setTitle('Jaws II');
-    $dvd->setCategory('thriller');
-    $dvd->setPrice(9.99);
-    
-    // create the new Dvd row
-    $id = Dvd::insert($dvd);
-    
-    // decision based on success/failure of insert
-    if ($id < 0){
-        // error action
-    } else {
-        // success action
-    }
-    
-    
-## ::update($dvd)
-this method adds a UPDATES an existing row in the database, based on the contents of the provided object
-returns true/false depending on success of the deletion
-
-e.g.
-
-    // update DB record for object 'dvd'
-    $updateSuccess = Dvd:update($dvd);
-    
-            
-## ::searchByColumn($columnName, $searchText))
-perform an SQL '%' wildcard search on the given column with the given search text
-returns an array of objects that match an SQL 'LIKE' query 
-
-e.g.
-
-    // get all Dvds with 'jaws' in the title
-    $jawsDvds = Dvd::searchByColumn('title', 'jaws');
-
-
-have fun!
-
-.. matt ..
-now with semantic versioning...
-
+[link-packagist]: https://packagist.org/packages/:vendor/:package_name
+[link-travis]: https://travis-ci.org/:vendor/:package_name
+[link-scrutinizer]: https://scrutinizer-ci.com/g/:vendor/:package_name/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/:vendor/:package_name
+[link-downloads]: https://packagist.org/packages/:vendor/:package_name
+[link-author]: https://github.com/:author_username
+[link-contributors]: ../../contributors
