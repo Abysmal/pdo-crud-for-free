@@ -7,6 +7,7 @@ as long as you follow a few basic (common practice) assumptions
 ## ASSUMPTION 1: lowerCamelCase - DB table column names matching PHP Class properties
 This tool assumes your database table column names, and their corresponding PHP private class properties are named consistently in 'lowerCamelCase'
 e.g.
+
     id
     title
     category
@@ -15,8 +16,13 @@ e.g.
 ## ASSUMPTION 2: lower case plural DB table name mapping to upper case singular PHP class name
 If you have a DB table 'products' this will correspond to a PHP class 'Product'
 
-table names are named lower case, are and plural, e.g 'users'
-PHP class names are named with a capital first letter, and are singular, e.g. 'User'
+table names are named lower case, are and plural, e.g 
+
+    users
+
+PHP class names are named with a capital first letter, and are singular, e.g. 
+
+    User
 
 ## ASSUMPTION 3: no constructor for your PHP classes
 due to the nature of PDO populating properties of objects when DB rows are converted into object instances
@@ -24,11 +30,11 @@ do not have a constructor for the PHP classes that correspond to your DB tables
 
 so you'd create a new object, and use the objects public 'setter' methods
 e.g.
-$p = new Product();
-$p->setDescription('hammer');
-$p->setPrice(9.99);
-etc.
 
+    $p = new Product();
+    $p->setDescription('hammer');
+    $p->setPrice(9.99);
+    etc.
 
 ## step 1: create your DB tables
 e.g. create your tables (with integer 'id' field, primary key, auto-increment)

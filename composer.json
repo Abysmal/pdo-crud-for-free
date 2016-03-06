@@ -1,23 +1,24 @@
 {
-  "repositories": [
+  "name": "mattsmithdev/pdo-crud-for-free",
+  "version": "dev-master",
+  "license":"CC-BY-NC-3.0",
+  "description":"make it really simply to do db crud with pdo",
+  "authors": [
     {
-      "type": "package",
-      "package": {
-        "name": "mattsmithdev/pdo-crud-for-free",
-        "version": "dev-master",
-        "license":"CC-BY-NC-3.0",
-        "description":"make it really simply to do db crud with pdo",
-        "source": {
-          "url": "https://github.com/dr-matt-smith/pdo-crud-for-free",
-          "type": "git",
-          "reference": "master"
-        },
-        "autoload": {
-          "psr-4" : {
-            "Mattsmithdev\\" : "src"
-          }
-        }
-      }
+      "name": "Dr Matt Smith",
+      "email": "dr_matt_smith@me.com"
     }
-  ]
+  ],
+  "minimum-stability": "dev",
+  "source": {
+    "url": "https://github.com/dr-matt-smith/pdo-crud-for-free",
+    "type": "git",
+    "reference": "master"
+  },
+  "autoload": {
+    "psr-4" : {
+      "Mattsmithdev\\" : "src"
+    }
+  }
 }
+
