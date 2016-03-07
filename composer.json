@@ -1,7 +1,7 @@
 {
     "name": "mattsmithdev/pdo-crud-for-free",
     "type": "library",
-    "description": ":package_description",
+    "description": "make it really simply to do db crud with pdo",
     "keywords": [
         "mattsmithdev",
         "pdo-crud-for-free"
