@@ -72,6 +72,9 @@ foreach ($products as $product){
 }
 ```
 
+For more details see below. Also there is a full sample web application project on GitGub at:
+ (pdo-crud-for-free-example-project)[https://github.com/dr-matt-smith/pdo-crud-for-free-example-project]
+
 # More detailed usage instructions (and important assumptions)
 
 
