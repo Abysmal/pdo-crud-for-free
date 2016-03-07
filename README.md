@@ -204,6 +204,40 @@ e.g.
     // get all Dvds with 'jaws' in the title
     $jawsDvds = Dvd::searchByColumn('title', 'jaws');
 
+## custom PDO methods
+If the 'free' DB methods are insufficient, it's easy to add your own methods to your PHP classes that correspond to your DB tables.
+
+Here is a method that could be added to a class **Product** allowing a custom search by 'id' and text within 'descrition':
+
+    /**
+     * illustrate custom PDO DB method
+     * in this case we search for products with an id >= $minId, and whose descrption contains $searchText
+     *
+     * @param $minId
+     * @param $searchText
+     *
+     * @return array
+     */
+    public static function customSearch($minId, $searchText)
+    {
+        $db = new DatabaseManager();
+        $connection = $db->getDbh();
+
+        // wrap wildcard '%' around the serach text for the SQL query
+        $searchText = '%' . $searchText . '%';
+
+        $sql = 'SELECT * FROM products WHERE (description LIKE :searchText) AND (id > :minId)';
+
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(':minId', $minId, \PDO::PARAM_INT);
+        $statement->bindParam(':searchText', $searchText, \PDO::PARAM_STR);
+        $statement->setFetchMode(\PDO::FETCH_CLASS, '\\' . __CLASS__);
+        $statement->execute();
+
+        $products = $statement->fetchAll();
+
+        return $products;
+    }
 
 ## Change log
 
