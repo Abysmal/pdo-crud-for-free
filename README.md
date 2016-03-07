@@ -30,10 +30,15 @@ $ composer require mattsmithdev/pdo-crud-for-free=dev-master
 
 ## Usage
 
+This example assumes you have a MySQL DB table named 'products', with columns 'id' and 'description'. You need to write a corresponding class 'Product' (note capital first letter ...).
+
 ``` php
 
 // file: /src/Product.php
-class Product extends \Mattsmithdev\Pdo\DatabaseTable {
+namespace <MyNameSpace>;
+
+class Product extends \Mattsmithdev\PdoCrud\DatabaseTable 
+{
     // private properties with EXACTLY same names as DB table columns
     
     // and ensure DB table has 'id' integer auto-increment primary key
@@ -44,15 +49,22 @@ class Product extends \Mattsmithdev\Pdo\DatabaseTable {
 
 // file: /public-web/index.php or /src/SomeController->method()
 
-// get all products from DB as array of Product objects
-$products = Product::getAll();
+require_once __DIR__ . '/<PATH_TO_AUTLOAD>';
 
-// outputs something like: 
+// the DatabaseManager class needs the following 4 constants to be defined in order to create the DB connection
+define('DB_HOST', '<host>');
+define('DB_USER', '<db_username>');
+define('DB_PASS', '<db_userpassword>');
+define('DB_NAME', '<db_name>');
+
+// get all products from DB as array of Product objects
+$products = \<MyNameSpace>\Product::getAll();
+
+// outputs something like:
 //  hammer, nail, nuts, bolts
 foreach ($products as $product){
-    print $product->getDescription() . ' ,';
+    print $product->getDescription() . ', ';
 }
-
 ```
 
 ## Change log
