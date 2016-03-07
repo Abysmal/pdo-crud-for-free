@@ -10,6 +10,10 @@
 This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
 PSRs you support to avoid any confusion with users and contributors.
 
+This package provides a few classes to try to give programmers using PDO in a simple way some instance CRUD (create-read-update-delete) method, 'for free', simply by subclassing \Mattsmithdev\Pdo\DatabaseTable.
+
+All code is (intented :-) to follow PSR-1, PSR-2 coding standards. Classes are following the PSR-4 autoloading standard.
+
 ## Install
 
 Via Composer
