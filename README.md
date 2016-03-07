@@ -7,9 +7,9 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This package provides a few classes to try to give programmers using PDO in a simple way some instance CRUD (create-read-update-delete) method, 'for free', simply by subclassing **\Mattsmithdev\Pdo\DatabaseTable**.
+This package provides a few classes to try to give programmers using PDO (with MySQL) in a simple way some instance CRUD (create-read-update-delete) method, 'for free', simply by subclassing **\Mattsmithdev\Pdo\DatabaseTable**.
 
-All code is (intented :-) to follow PSR-1, PSR-2 coding standards. Classes are following the PSR-4 autoloading standard.
+All code is (intended :-) to follow PSR-1, PSR-2 coding standards. Classes are following the PSR-4 autoloading standard.
 
 ## Install
 
@@ -40,8 +40,13 @@ namespace <MyNameSpace>;
 class Product extends \Mattsmithdev\PdoCrud\DatabaseTable 
 {
     // private properties with EXACTLY same names as DB table columns
+    private $id;
+    private $description;
     
-    // and ensure DB table has 'id' integer auto-increment primary key
+    public function getDescription()
+    {
+        return $this->description;
+    }
 }
 ```
 
@@ -73,16 +78,17 @@ foreach ($products as $product){
 ## ASSUMPTION 1: lowerCamelCase - DB table column names matching PHP Class properties
 This tool assumes your database table column names, and their corresponding PHP private class properties are named consistently in 'lowerCamelCase'
 e.g.
+
     id
     title
     category
     price
 
 ## ASSUMPTION 2: lower case plural DB table name mapping to upper case singular PHP class name
-If you have a DB table 'products' this will correspond to a PHP class 'Product'
+If you have a DB table '**products**' this will correspond to a PHP class '**Product**'
 
-table names are named lower case, are and plural, e.g 'users'
-PHP class names are named with a capital first letter, and are singular, e.g. 'User'
+table names are named lower case, and are plural nouns, e.g '**users**'
+PHP class names are named with a capital first letter, and are singular nouns, e.g. '**User**'
 
 ## ASSUMPTION 3: no constructor for your PHP classes
 due to the nature of PDO populating properties of objects when DB rows are converted into object instances
@@ -131,14 +137,15 @@ e.g. to get an array of all dvd records from table 'dvds' just write:
     
 
 ## ::getAll()
-this method returns an array of objects for eac row of the corresponding DB table
+this method returns an array of objects for each row of the corresponding DB table
 e.g.
 
     // array of Dvd objects, populated from database table 'dvds'
     $dvds = Dvd::getAll();
 
 ## ::getOneById($id)
-this method returns an array of objects for eac row of the corresponding DB table
+this method returns one object of class for the corresponding DB table record with the given 'id'
+(returns 'null' if no such record exists with that primary key id)
 e.g.
 
     // one Dvd object (or 'null'), populated by row in database table 'dvds' with id=27
