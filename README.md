@@ -238,6 +238,24 @@ Here is a method that could be added to a class **Product** allowing a custom se
 
         return $products;
     }
+    
+and here is an example of its usage, in a controller function:
+
+    // get products from DB as array of Product objects - id > minId, description containing $searchText
+    $minId = 2;
+    $searchText = 'er';
+    $products = Product::customSearch($minId, $searchText);
+
+    // outputs something like:
+    //  [5] pliers
+    //  [7] hammer
+    foreach ($products as $product){
+        print '<p>';
+        print 'id [' . $product->getId() . '] ';
+        print $product->getDescription();
+    }
+
+    //  [1] nut -- not listed due to search criteria
 
 ## Change log
 
