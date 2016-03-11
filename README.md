@@ -115,13 +115,13 @@ e.g. SQL table to store DVD data
     category:text
     price:float
 
-## step 2: create a corresponding PHP class, and subclass from Mattsmithdev\DatabaseTable
+## step 2: create a corresponding PHP class, and subclass from Mattsmithdev\PdoCrud\DatabaseTable
 e.g.
 
     <?php
     namespace Whatever;
     
-    use Mattsmithdev\DatabaseTable;
+    use Mattsmithdev\PdoCrud\DatabaseTable;
     
         class Dvd extends DatabaseTable
         {
