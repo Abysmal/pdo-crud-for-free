@@ -124,7 +124,7 @@ class DatabaseTable
 
     /**
      * insert new record into the DB table
-     * returns new record ID if insertation was successful, otherwise -1
+     * returns new record ID if insertion was successful, otherwise -1
      * @param Object $object
      * @return integer
      */
