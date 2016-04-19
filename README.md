@@ -19,6 +19,7 @@ $ composer require mattsmithdev/pdo-crud-for-free
 NOTE - until I get the hang of SemVer (and get to a 1.0.0 or later version), 
 then you'll need to force the dev-master download as follows:
 
+
 ``` bash
 $ composer require mattsmithdev/pdo-crud-for-free=dev-master
 ```
