@@ -7,6 +7,9 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
+[![Latest Stable Version](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/v/stable)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![Total Downloads](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/downloads)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![Latest Unstable Version](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/v/unstable)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![License](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/license)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free)
+
+
 This package provides a few classes to try to give programmers using PDO (with MySQL) in a simple way some instance CRUD (create-read-update-delete) method, 'for free', simply by subclassing **\Mattsmithdev\PdoCrud\DatabaseTable**.
 
 All code is (intended :-) to follow PSR-1, PSR-2 coding standards. Classes are following the PSR-4 autoloading standard.
