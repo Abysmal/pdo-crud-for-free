@@ -1,11 +1,11 @@
 # pdo-crud-for-free
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads]
+[comment]: <> [![Latest Version on Packagist][ico-version]][link-packagist]
+[comment]: <> [![Software License][ico-license]](LICENSE.md)
+[comment]: <> [![Build Status][ico-travis]][link-travis]
+[comment]: <> [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
+[comment]: <> [![Quality Score][ico-code-quality]][link-code-quality]
+[comment]: <> [![Total Downloads][ico-downloads]][link-downloads]
 
 [![Latest Stable Version](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/v/stable)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![Total Downloads](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/downloads)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![Latest Unstable Version](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/v/unstable)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![License](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/license)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free)
 
