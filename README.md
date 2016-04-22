@@ -1,7 +1,7 @@
 # pdo-crud-for-free
 
 
-[![Latest Stable Version](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/v/stable)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![Total Downloads](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/downloads)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![Latest Unstable Version](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/v/unstable)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![License](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/license)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free)
+[![Build Status](https://travis-ci.org/dr-matt-smith/pdo-crud-for-free.svg?branch=master)](https://travis-ci.org/dr-matt-smith/pdo-crud-for-free) [![Latest Stable Version](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/v/stable)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![Total Downloads](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/downloads)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![Latest Unstable Version](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/v/unstable)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free) [![License](https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/license)](https://packagist.org/packages/mattsmithdev/pdo-crud-for-free)
 
 
 This package provides a few classes to try to give programmers using PDO (with MySQL) in a simple way some instance CRUD (create-read-update-delete) method, 'for free', simply by subclassing **\Mattsmithdev\PdoCrud\DatabaseTable**.
