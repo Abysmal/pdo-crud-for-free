@@ -56,7 +56,7 @@ class DatabaseManager
             $this->dbh = new \PDO($dsn, $this->user, $this->pass, $options);
         } catch (\PDOException $e) {
             $this->error = $e->getMessage();
-            print 'sorry - a database error occured - please contact the site administrator ...';
+            print 'sorry - a database error occurred - please contact the site administrator ...';
             print '<br>';
             print  $e->getMessage();
         }

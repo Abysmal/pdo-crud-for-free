@@ -23,12 +23,15 @@ class DatabaseTable
         return $classNameLower . 's';
     }
 
+    /**
+     * @return array
+     */
     public static function getAll()
     {
         $db = new DatabaseManager();
         $connection = $db->getDbh();
 
-        $sql = 'SELECT * from ' . static::getTableName();
+        $sql = 'SELECT * FROM ' . static::getTableName();
 
         $statement = $connection->prepare($sql);
         $statement->setFetchMode(\PDO::FETCH_CLASS, '\\' .  static::class);
@@ -38,12 +41,17 @@ class DatabaseTable
         return $objects;
     }
 
+    /**
+     * @param $id
+     * @return mixed|null
+     */
     public static function getOneById($id)
     {
         $db = new DatabaseManager();
         $connection = $db->getDbh();
 
-        $statement = $connection->prepare('SELECT * from ' .  static::getTableName()  . ' WHERE id=:id');
+        $sql = 'SELECT * from ' .  static::getTableName()  . ' WHERE id=:id';
+        $statement = $connection->prepare($sql);
         $statement->bindParam(':id', $id, \PDO::PARAM_INT);
         $statement->setFetchMode(\PDO::FETCH_CLASS, '\\' .  static::class);
         $statement->execute();
@@ -68,13 +76,19 @@ class DatabaseTable
         $db = new DatabaseManager();
         $connection = $db->getDbh();
 
-        $statement = $connection->prepare('DELETE from ' . static::getTableName()  . ' WHERE id=:id');
+        $sql = 'DELETE from ' . static::getTableName()  . ' WHERE id=:id';
+        $statement = $connection->prepare($sql);
         $statement->bindParam(':id', $id, \PDO::PARAM_INT);
         $queryWasSuccessful = $statement->execute();
         return $queryWasSuccessful;
     }
 
 
+    /**
+     * @param $columnName
+     * @param $searchText
+     * @return array
+     */
     public static function searchByColumn($columnName, $searchText)
     {
         $db = new DatabaseManager();
@@ -83,7 +97,8 @@ class DatabaseTable
         // wrap wildcard '%' around the serach text for the SQL query
         $searchText = '%' . $searchText . '%';
 
-        $statement = $connection->prepare('SELECT * from ' . static::getTableName()  . ' WHERE ' . $columnName . ' LIKE :searchText');
+        $sql = 'SELECT * FROM ' . static::getTableName()  . ' WHERE ' . $columnName . ' LIKE :searchText';
+        $statement = $connection->prepare($sql);
         $statement->bindParam(':searchText', $searchText, \PDO::PARAM_STR);
         $statement->setFetchMode(\PDO::FETCH_CLASS, '\\' .  static::class);
         $statement->execute();
@@ -97,10 +112,10 @@ class DatabaseTable
     /**
      * insert new record into the DB table
      * returns new record ID if insertation was successful, otherwise -1
-     * @param Object $object
+     * @param DatabaseTable $object
      * @return integer
      */
-    public static function insert($object)
+    public static function insert(DatabaseTable $object)
     {
         $db = new DatabaseManager();
         $connection = $db->getDbh();
@@ -110,7 +125,8 @@ class DatabaseTable
         $insertFieldList = DatatbaseUtility::fieldListToInsertString($fields);
         $valuesFieldList = DatatbaseUtility::fieldListToValuesString($fields);
 
-        $statement = $connection->prepare('INSERT into '. static::getTableName()  . ' ' . $insertFieldList . $valuesFieldList);
+        $sql = 'INSERT into '. static::getTableName()  . ' ' . $insertFieldList . $valuesFieldList;
+        $statement = $connection->prepare($sql);
         $statement->execute($objectAsArrayForSqlInsert);
 
         $queryWasSuccessful = ($statement->rowCount() > 0);
@@ -125,7 +141,7 @@ class DatabaseTable
     /**
      * insert new record into the DB table
      * returns new record ID if insertion was successful, otherwise -1
-     * @param Object $object
+     * @param DatabaseTable $object
      * @return integer
      */
     public static function update(DatabaseTable $object)
