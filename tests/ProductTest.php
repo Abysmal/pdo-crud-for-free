@@ -26,24 +26,6 @@ class ProductDBTest extends \PHPUnit_Extensions_Database_TestCase
         return $this->createXMLDataSet($seedFilePath);
     }
 
-    /**
-     * @expectedException \PDOException
-     */
-    public function testCreateBadConnectionThrowsPdoException()
-    {
-        // arrange
-        $oldPassword = DB_PASS;
-        define('DB_PASS', 'rubbish-rubbish-rubbish');
-
-        $dbm = new DatabaseManager();
-        define('DB_PASS', $oldPassword);
-
-        $result = $dbm->getError();
-
-        // assert
-        $this->assertContains($result, 'sorry - a database error occurred - please contact the site administrator ...');
-    }
-
 
     public function testNumRowsFromSeedData()
     {
