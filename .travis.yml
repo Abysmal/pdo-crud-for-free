@@ -14,4 +14,4 @@ install:
   - composer update
 
 script:
-  - phpunit
+  - phpunit -c phpunit_travis.xml
