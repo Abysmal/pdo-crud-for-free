@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Pdo-crud-for-free by dr-matt-smith</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Pdo-crud-for-free</h1>
+        <h2>Classes to provide MySQL PDO CRUD methods &#39;magically&#39; via a simple subclassing</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/dr-matt-smith/pdo-crud-for-free/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/dr-matt-smith/pdo-crud-for-free/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/dr-matt-smith/pdo-crud-for-free" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="pdo-crud-for-free" class="anchor" href="#pdo-crud-for-free" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>pdo-crud-for-free</h1>
+
+<p><a href="https://travis-ci.org/dr-matt-smith/pdo-crud-for-free"><img src="https://travis-ci.org/dr-matt-smith/pdo-crud-for-free.svg?branch=master" alt="Build Status"></a> <a href="https://packagist.org/packages/mattsmithdev/pdo-crud-for-free"><img src="https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/v/stable" alt="Latest Stable Version"></a> <a href="https://packagist.org/packages/mattsmithdev/pdo-crud-for-free"><img src="https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/downloads" alt="Total Downloads"></a> <a href="https://packagist.org/packages/mattsmithdev/pdo-crud-for-free"><img src="https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/v/unstable" alt="Latest Unstable Version"></a> <a href="https://packagist.org/packages/mattsmithdev/pdo-crud-for-free"><img src="https://poser.pugx.org/mattsmithdev/pdo-crud-for-free/license" alt="License"></a></p>
+
+<p>This package provides a few classes to try to give programmers using PDO (with MySQL) in a simple way some instance CRUD (create-read-update-delete) method, 'for free', simply by subclassing <strong>\Mattsmithdev\PdoCrud\DatabaseTable</strong>.</p>
+
+<p>All code is (intended :-) to follow PSR-1, PSR-2 coding standards. Classes are following the PSR-4 autoloading standard.</p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
+
+<p>Via Composer</p>
+
+<div class="highlight highlight-source-shell"><pre>$ composer require mattsmithdev/pdo-crud-for-free</pre></div>
+
+<p>NOTE - until I get the hang of SemVer (and get to a 1.0.0 or later version), 
+then you'll need to force the dev-master download as follows:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ composer require mattsmithdev/pdo-crud-for-free=dev-master</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>This example assumes you have a MySQL DB table named 'products', with columns 'id' and 'description'. You need to write a corresponding class 'Product' (note capital first letter ...).</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// file: /src/Product.php</span></span>
+<span class="pl-s1"><span class="pl-c1">namespace</span> <span class="pl-k">&lt;</span><span class="pl-c1">MyNameSpace</span><span class="pl-k">&gt;</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">class</span> <span class="pl-en">Product</span> <span class="pl-k">extends</span> <span class="pl-c1">\Mattsmithdev\PdoCrud\</span><span class="pl-e">DatabaseTable</span> </span>
+<span class="pl-s1">{</span>
+<span class="pl-s1">    <span class="pl-c">// private properties with EXACTLY same names as DB table columns</span></span>
+<span class="pl-s1">    <span class="pl-k">private</span> <span class="pl-smi">$id</span>;</span>
+<span class="pl-s1">    <span class="pl-k">private</span> <span class="pl-smi">$description</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">getDescription</span>()</span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">        <span class="pl-k">return</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">description</span>;</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">}</span></pre></div>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// file: /public-web/index.php or /src/SomeController-&gt;method()</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">require_once</span> <span class="pl-c1">__DIR__</span> <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">'</span>/&lt;PATH_TO_AUTLOAD&gt;<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// the DatabaseManager class needs the following 4 constants to be defined in order to create the DB connection</span></span>
+<span class="pl-s1"><span class="pl-c1">define</span>(<span class="pl-s"><span class="pl-pds">'</span>DB_HOST<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>&lt;host&gt;<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-c1">define</span>(<span class="pl-s"><span class="pl-pds">'</span>DB_USER<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>&lt;db_username&gt;<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-c1">define</span>(<span class="pl-s"><span class="pl-pds">'</span>DB_PASS<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>&lt;db_userpassword&gt;<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-c1">define</span>(<span class="pl-s"><span class="pl-pds">'</span>DB_NAME<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>&lt;db_name&gt;<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// get all products from DB as array of Product objects</span></span>
+<span class="pl-s1"><span class="pl-smi">$products</span> <span class="pl-k">=</span> \<span class="pl-k">&lt;</span><span class="pl-c1">MyNameSpace</span><span class="pl-k">&gt;</span><span class="pl-c1">\</span><span class="pl-c1">Product</span><span class="pl-k">::</span>getAll();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// outputs something like:</span></span>
+<span class="pl-s1"><span class="pl-c">//  hammer, nail, nuts, bolts</span></span>
+<span class="pl-s1"><span class="pl-k">foreach</span> (<span class="pl-smi">$products</span> <span class="pl-k">as</span> <span class="pl-smi">$product</span>){</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-smi">$product</span><span class="pl-k">-&gt;</span>getDescription() <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">'</span>, <span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1">}</span></pre></div>
+
+<p>For more details see below. Also there is a full sample web application project on GitGub at:
+ (pdo-crud-for-free-example-project)[<a href="https://github.com/dr-matt-smith/pdo-crud-for-free-example-project">https://github.com/dr-matt-smith/pdo-crud-for-free-example-project</a>]</p>
+
+<h1>
+<a id="more-detailed-usage-instructions-and-important-assumptions" class="anchor" href="#more-detailed-usage-instructions-and-important-assumptions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>More detailed usage instructions (and important assumptions)</h1>
+
+<h2>
+<a id="assumption-1-lowercamelcase---db-table-column-names-matching-php-class-properties" class="anchor" href="#assumption-1-lowercamelcase---db-table-column-names-matching-php-class-properties" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ASSUMPTION 1: lowerCamelCase - DB table column names matching PHP Class properties</h2>
+
+<p>This tool assumes your database table column names, and their corresponding PHP private class properties are named consistently in 'lowerCamelCase'
+e.g.</p>
+
+<pre><code>id
+title
+category
+price
+</code></pre>
+
+<h2>
+<a id="assumption-2-lower-case-plural-db-table-name-mapping-to-upper-case-singular-php-class-name" class="anchor" href="#assumption-2-lower-case-plural-db-table-name-mapping-to-upper-case-singular-php-class-name" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ASSUMPTION 2: lower case plural DB table name mapping to upper case singular PHP class name</h2>
+
+<p>If you have a DB table '<strong>products</strong>' this will correspond to a PHP class '<strong>Product</strong>'</p>
+
+<p>table names are named lower case, and are plural nouns, e.g '<strong>users</strong>'
+PHP class names are named with a capital first letter, and are singular nouns, e.g. '<strong>User</strong>'</p>
+
+<h2>
+<a id="assumption-3-no-constructor-for-your-php-classes" class="anchor" href="#assumption-3-no-constructor-for-your-php-classes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ASSUMPTION 3: no constructor for your PHP classes</h2>
+
+<p>due to the nature of PDO populating properties of objects when DB rows are converted into object instances
+do not have a constructor for the PHP classes that correspond to your DB tables</p>
+
+<p>so you'd create a new object, and use the objects public 'setter' methods
+e.g.
+$p = new Product();
+$p-&gt;setDescription('hammer');
+$p-&gt;setPrice(9.99);
+etc.</p>
+
+<h2>
+<a id="step-1-create-your-db-tables" class="anchor" href="#step-1-create-your-db-tables" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>step 1: create your DB tables</h2>
+
+<p>e.g. create your tables (with integer 'id' field, primary key, auto-increment)</p>
+
+<p>e.g. SQL table to store DVD data</p>
+
+<pre><code>id:int (primary key, autoincrement)
+title:text
+category:text
+price:float
+</code></pre>
+
+<h2>
+<a id="step-2-create-a-corresponding-php-class-and-subclass-from-mattsmithdevpdocruddatabasetable" class="anchor" href="#step-2-create-a-corresponding-php-class-and-subclass-from-mattsmithdevpdocruddatabasetable" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>step 2: create a corresponding PHP class, and subclass from Mattsmithdev\PdoCrud\DatabaseTable</h2>
+
+<p>e.g.</p>
+
+<pre><code>&lt;?php
+namespace Whatever;
+
+use Mattsmithdev\PdoCrud\DatabaseTable;
+
+    class Dvd extends DatabaseTable
+    {
+        private $id;
+        private $title;
+        private $category;
+        private $price;
+
+        // and public getters and setters ...
+</code></pre>
+
+<h2>
+<a id="step-3-now-use-the-magically-appearing-static-db-crud-methods" class="anchor" href="#step-3-now-use-the-magically-appearing-static-db-crud-methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>step 3: now use the 'magically appearing' static DB CRUD methods</h2>
+
+<p>e.g. to get an array of all dvd records from table 'dvds' just write:</p>
+
+<pre><code>$dvds = Dvd::getAll();
+</code></pre>
+
+<h2>
+<a id="getall" class="anchor" href="#getall" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>::getAll()</h2>
+
+<p>this method returns an array of objects for each row of the corresponding DB table
+e.g.</p>
+
+<pre><code>// array of Dvd objects, populated from database table 'dvds'
+$dvds = Dvd::getAll();
+</code></pre>
+
+<h2>
+<a id="getonebyidid" class="anchor" href="#getonebyidid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>::getOneById($id)</h2>
+
+<p>this method returns one object of class for the corresponding DB table record with the given 'id'
+(returns 'null' if no such record exists with that primary key id)
+e.g.</p>
+
+<pre><code>// one Dvd object (or 'null'), populated by row in database table 'dvds' with id=27
+$dvds = Dvd::getOneById(27);
+</code></pre>
+
+<h2>
+<a id="deleteid" class="anchor" href="#deleteid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>::delete($id)</h2>
+
+<p>this method deletes the record corresponding to the given 'id'
+returns true/false depending on success of the deletion
+e.g.</p>
+
+<pre><code>// delete row in database table 'dvds' with id=12
+$deleteSuccess = Dvd::delete(12);
+</code></pre>
+
+<h2>
+<a id="insertdvd" class="anchor" href="#insertdvd" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>::insert($dvd)</h2>
+
+<p>this method adds a new row to the database, based on the contents of the provided object
+(any 'id' in this object is ignored, since the table is auto-increment, so it's left to the DB to assign a new, unique 'id' for new records)
+returns the 'id' of the new record (or -1 if error when inserting)
+e.g.</p>
+
+<pre><code>// delete row in database table 'dvds' with id=12
+$dvd = new Dvd();
+$dvd-&gt;setTitle('Jaws II');
+$dvd-&gt;setCategory('thriller');
+$dvd-&gt;setPrice(9.99);
+
+// create the new Dvd row
+$id = Dvd::insert($dvd);
+
+// decision based on success/failure of insert
+if ($id &lt; 0){
+    // error action
+} else {
+    // success action
+}
+</code></pre>
+
+<h2>
+<a id="updatedvd" class="anchor" href="#updatedvd" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>::update($dvd)</h2>
+
+<p>this method adds a UPDATES an existing row in the database, based on the contents of the provided object
+returns true/false depending on success of the deletion</p>
+
+<p>e.g.</p>
+
+<pre><code>// update DB record for object 'dvd'
+$updateSuccess = Dvd:update($dvd);
+</code></pre>
+
+<h2>
+<a id="searchbycolumncolumnname-searchtext" class="anchor" href="#searchbycolumncolumnname-searchtext" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>::searchByColumn($columnName, $searchText))</h2>
+
+<p>perform an SQL '%' wildcard search on the given column with the given search text
+returns an array of objects that match an SQL 'LIKE' query </p>
+
+<p>e.g.</p>
+
+<pre><code>// get all Dvds with 'jaws' in the title
+$jawsDvds = Dvd::searchByColumn('title', 'jaws');
+</code></pre>
+
+<h2>
+<a id="custom-pdo-methods" class="anchor" href="#custom-pdo-methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>custom PDO methods</h2>
+
+<p>If the 'free' DB methods are insufficient, it's easy to add your own methods to your PHP classes that correspond to your DB tables.</p>
+
+<p>Here is a method that could be added to a class <strong>Product</strong> allowing a custom search by 'id' and text within 'descrition':</p>
+
+<pre><code>/**
+ * illustrate custom PDO DB method
+ * in this case we search for products with an id &gt;= $minId, and whose descrption contains $searchText
+ *
+ * @param $minId
+ * @param $searchText
+ *
+ * @return array
+ */
+public static function customSearch($minId, $searchText)
+{
+    $db = new DatabaseManager();
+    $connection = $db-&gt;getDbh();
+
+    // wrap wildcard '%' around the serach text for the SQL query
+    $searchText = '%' . $searchText . '%';
+
+    $sql = 'SELECT * FROM products WHERE (description LIKE :searchText) AND (id &gt; :minId)';
+
+    $statement = $connection-&gt;prepare($sql);
+    $statement-&gt;bindParam(':minId', $minId, \PDO::PARAM_INT);
+    $statement-&gt;bindParam(':searchText', $searchText, \PDO::PARAM_STR);
+    $statement-&gt;setFetchMode(\PDO::FETCH_CLASS, '\\' . __CLASS__);
+    $statement-&gt;execute();
+
+    $products = $statement-&gt;fetchAll();
+
+    return $products;
+}
+</code></pre>
+
+<p>and here is an example of its usage, in a controller function:</p>
+
+<pre><code>// get products from DB as array of Product objects - id &gt; minId, description containing $searchText
+$minId = 2;
+$searchText = 'er';
+$products = Product::customSearch($minId, $searchText);
+
+// outputs something like:
+//  [5] pliers
+//  [7] hammer
+foreach ($products as $product){
+    print '&lt;p&gt;';
+    print 'id [' . $product-&gt;getId() . '] ';
+    print $product-&gt;getDescription();
+}
+
+//  [1] nut -- not listed due to search criteria
+</code></pre>
+
+<h2>
+<a id="change-log" class="anchor" href="#change-log" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Change log</h2>
+
+<p>Please see <a href="CHANGELOG.md">CHANGELOG</a> for more information what has changed recently.</p>
+
+<h2>
+<a id="testing" class="anchor" href="#testing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Testing</h2>
+
+<div class="highlight highlight-source-shell"><pre>$ composer <span class="pl-c1">test</span></pre></div>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Please see <a href="CONTRIBUTING.md">CONTRIBUTING</a> and <a href="CONDUCT.md">CONDUCT</a> for details.</p>
+
+<h2>
+<a id="security" class="anchor" href="#security" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Security</h2>
+
+<p>If you discover any security related issues, please email <a href="mailto:dr_matt_smith@me.com">dr_matt_smith@me.com</a> instead of using the issue tracker.</p>
+
+<h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credits</h2>
+
+<ul>
+<li>[Matt Smith][<a href="https://github.com/dr-matt-smith">https://github.com/dr-matt-smith</a>]</li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>The MIT License (MIT). Please see <a href="LICENSE.md">License File</a> for more information.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
