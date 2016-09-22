@@ -97,10 +97,11 @@ do not have a constructor for the PHP classes that correspond to your DB tables
 
 so you'd create a new object, and use the objects public 'setter' methods
 e.g.
-$p = new Product();
-$p->setDescription('hammer');
-$p->setPrice(9.99);
-etc.
+
+    $p = new Product();
+    $p->setDescription('hammer');
+    $p->setPrice(9.99);
+    etc.
 
 
 ## step 1: create your DB tables
