@@ -36,7 +36,8 @@
         }
     },
     "scripts": {
-        "test": "php phpunit.phar"
+        "test": "php phpunit.phar",
+        "testtravis": "php phpunit.phar -c phpunit_travis.xml"
     },
     "extra": {
         "branch-alias": {

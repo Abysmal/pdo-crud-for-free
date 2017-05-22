@@ -20,9 +20,10 @@ class ProductDBTest extends TestCase
         $dbUser = DB_USER;
         $dbPass = DB_PASS;
 
-        $dbDsn = DB_DSN;
+//        $dbDsn = DB_DSN;
         $host = DB_HOST;
-        $dsn = 'mysql:host=' . $host . ';dbname=' . $dbName;
+        $dbDsn = 'mysql:host=' . $host . ';dbname=' . $dbName;
+
 
         // mysql
         $db = new \PDO($dbDsn, $dbUser, $dbPass);
