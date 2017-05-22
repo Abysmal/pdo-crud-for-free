@@ -5,17 +5,27 @@ namespace Mattsmithdev\PdoCrudTest;
 use Mattsmithdev\PdoCrud\DatabaseManager;
 use Mattsmithdev\PdoCrudTest\Product;
 
-class ProductDBTest extends \PHPUnit_Extensions_Database_TestCase
+use PHPUnit\Framework\TestCase;
+use PHPUnit\DbUnit\TestCaseTrait;
+
+class ProductDBTest extends TestCase
 {
+
+    use TestCaseTrait;
+
     public function getConnection()
     {
-        $host = DB_HOST;
+
         $dbName = DB_NAME;
         $dbUser = DB_USER;
         $dbPass = DB_PASS;
-        // mysql
+
+        $dbDsn = DB_DSN;
+        $host = DB_HOST;
         $dsn = 'mysql:host=' . $host . ';dbname=' . $dbName;
-        $db = new \PDO($dsn, $dbUser, $dbPass);
+
+        // mysql
+        $db = new \PDO($dbDsn, $dbUser, $dbPass);
         $connection = $this->createDefaultDBConnection($db, $dbName);
         return $connection;
     }

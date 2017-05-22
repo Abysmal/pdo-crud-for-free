@@ -28,6 +28,7 @@
     </logging>
 
     <php>
+        <const name="DB_DSN" value="mysql:dbname=crud_test;host=localhost"/>
         <const name="DB_HOST" value="localhost"/>
         <const name="DB_NAME" value="crud_test"/>
         <const name="DB_USER" value="travis"/>
